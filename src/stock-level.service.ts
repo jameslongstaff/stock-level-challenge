@@ -58,8 +58,8 @@ export class StockLevelService {
 
   /**
    * Calculates the remaing stock, throwing an error if the new quantity is negative.
-   * @param stockLevel
-   * @param totalSold
+   * @param {number} stockLevel
+   * @param {number} totalSold
    * @returns {number}
    */
   private calculateRemainingStock(stockLevel: number, totalSold: number): number {
