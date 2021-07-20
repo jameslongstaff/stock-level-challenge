@@ -1,0 +1,29 @@
+{
+  "spec_dir": "src",
+  "spec_files": [
+    "**/*[sS]pec.ts"
+  ],
+  "random": false,
+  "stopSpecOnExpectationFailure": false,
+  "reporters": [
+    {
+      "name": "jasmine-spec-reporter#SpecReporter",
+      "options": {
+        "suite": {
+          "displayNumber": true
+        },
+        "spec": {
+          "displayStacktrace": "pretty",
+          "displayDuration": true
+        }
+      }
+    },
+    {
+      "name": "jasmine-reporters#JUnitXmlReporter",
+      "options": {
+        "savePath": ".",
+        "consolidateAll": true
+      }
+    }
+  ]
+}
