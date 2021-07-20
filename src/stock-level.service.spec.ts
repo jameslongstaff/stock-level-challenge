@@ -19,6 +19,40 @@ describe('StockLevelService', () => {
   })
 
   describe('getStockLevel', () => {
+    it('should return 0 as quantity for sky if stocklevel is 0 and total transactions add up to 0.', async () => {
+      when(mockStockLevelRepository.getStockLevels()).thenResolve([
+        {
+          "sku": "FKO136294/98/95",
+          "stock": 0
+        },
+      ]);
+
+      when(mockTransactionRepository.getTransactions()).thenResolve([
+        {
+          "sku": "FKO136294/98/95",
+          "type": TransactionType.Order,
+          "qty": 0
+        },
+      ]);
+
+      const result = await service.getStockLevel('FKO136294/98/95');
+    
+      expect(result).toEqual({ sku: 'FKO136294/98/95', qty: 0 });
+    });
+
+    it('should throw an error if there are no stock levels or transactions.', async () => {
+      when(mockStockLevelRepository.getStockLevels()).thenResolve([]);
+
+      when(mockTransactionRepository.getTransactions()).thenResolve([]);
+
+      try {
+        await service.getStockLevel('LTV719449/39/39');
+        fail();
+      } catch(error) {
+        expect(error.message).toEqual('Error: Sku not found.');
+      }
+    });
+
     it('should throw an error if there are no stock levels or transactions.', async () => {
       when(mockStockLevelRepository.getStockLevels()).thenResolve([]);
 
