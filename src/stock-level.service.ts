@@ -13,10 +13,10 @@ export class StockLevelService {
 
   /**
    * Determines quantity of stock available for given sku.
-   * @param {Sku} sku
+   * @param {string} sku
    * @returns { sku: string, qty: number }
    */
-  public async getStockLevel(sku: Sku): Promise<{ sku: string, qty: number }> {
+  public async getStockLevel(sku: string): Promise<{ sku: string, qty: number }> {
     const [stockLevels, transactions] = await this.getData();
 
     const currentStockLevel = this.getCurrentStockLevel(stockLevels, sku);
