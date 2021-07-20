@@ -19,7 +19,7 @@ describe('StockLevelService', () => {
   })
 
   describe('getStockLevel', () => {
-    it('should return 0 as quantity for sky if stocklevel is 0 and total transactions add up to 0.', async () => {
+    it('should return 0 as quantity for sku if stocklevel is 0 and total transactions add up to 0.', async () => {
       when(mockStockLevelRepository.getStockLevels()).thenResolve([
         {
           "sku": "FKO136294/98/95",
@@ -34,6 +34,21 @@ describe('StockLevelService', () => {
           "qty": 0
         },
       ]);
+
+      const result = await service.getStockLevel('FKO136294/98/95');
+    
+      expect(result).toEqual({ sku: 'FKO136294/98/95', qty: 0 });
+    });
+
+    it('should return 0 as quantity for sku if stocklevel is 0 and there are no transactions for sku.', async () => {
+      when(mockStockLevelRepository.getStockLevels()).thenResolve([
+        {
+          "sku": "FKO136294/98/95",
+          "stock": 0
+        },
+      ]);
+
+      when(mockTransactionRepository.getTransactions()).thenResolve([]);
 
       const result = await service.getStockLevel('FKO136294/98/95');
     
