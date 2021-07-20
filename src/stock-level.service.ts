@@ -17,7 +17,7 @@ export class StockLevelService {
    * @returns { sku: string, qty: number }
    */
   public async getStockLevel(sku: Sku): Promise<{ sku: string, qty: number }> {
-    const [stockLevels, transactions] = await this.getStockData();
+    const [stockLevels, transactions] = await this.getData();
 
     const currentStockLevel = this.getCurrentStockLevel(stockLevels, sku);
 
@@ -74,7 +74,7 @@ export class StockLevelService {
    * Retrieves stock level and transaction data.
    * @returns {Promise<[StockLevel[], Transaction[]]>}
    */
-  private async getStockData(): Promise<[StockLevel[], Transaction[]]> {
+  private async getData(): Promise<[StockLevel[], Transaction[]]> {
     return await Promise.all([
       this.stockLevelRepository.getStockLevels(),
       this.transactionsRepostiory.getTransactions(),
