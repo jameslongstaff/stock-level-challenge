@@ -23,7 +23,7 @@ export class StockLevelService {
 
     const quantitySold = this.getTotalQuantityFromTransactions(transactions, sku);
 
-    if(!currentStockLevel && !quantitySold) {
+    if(currentStockLevel === undefined && quantitySold === undefined) {
       throw new Error('Error: Sku not found.');
     }
 
