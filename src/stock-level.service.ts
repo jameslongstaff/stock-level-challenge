@@ -50,7 +50,7 @@ export class StockLevelService {
    * Finds the stock level associated with the given sku.
    * @param {StockLevel[]} stockLevels
    * @param {Sku} sku
-   * @returns {number | undefined} undefined returned if there is no stock level for the provided sky.
+   * @returns {number | undefined} undefined returned if there is no stock level for the provided sku.
    */
   private getCurrentStockLevel(stockLevels: StockLevel[], sku: Sku): number | undefined {
     return stockLevels.find(stockLevel => stockLevel.sku === sku)?.stock;
